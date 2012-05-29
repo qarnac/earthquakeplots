@@ -23,6 +23,10 @@
  10, 85, 0.
  </coordinates>
  </LineString>
+ <LineStyle>  
+   <color>#000000</color>
+   <width>2</width>
+  </LineStyle> 
  </Placemark>
  
 </Document> </kml>
