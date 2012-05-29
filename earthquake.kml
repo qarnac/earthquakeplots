@@ -13,4 +13,16 @@
  </LineString>
 </Placemark>
 
+<Placemark>
+ <LineString>
+ <coordinates>
+ 10, -85, 0.
+ 10, -45, 0.
+ 10, 0, 0.
+ 10, 45, 0.
+ 10, 85, 0.
+ </coordinates>
+ </LineString>
+ </Placemark>
+ 
 </Document> </kml>
