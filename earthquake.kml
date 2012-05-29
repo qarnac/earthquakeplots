@@ -5,7 +5,7 @@
  <LineString>
   <coordinates>
    0, 0, 0. 
-   0, 90, 0.
+   0, 45, 0.
   </coordinates>
  </LineString>
 </Placemark>
