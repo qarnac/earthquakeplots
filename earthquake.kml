@@ -43,7 +43,9 @@
  <LineString>
   <coordinates>
   -179, 81, 0.
+  -90, 81, 0.
   0, 81, 0.
+  90, 81, 0.
   179, 81, 0.
   </coordinates>
  </LineString>
