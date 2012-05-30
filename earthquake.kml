@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://earth.google.com/kml/2.0"> <Document>
+
+<Placemark> 
+ <LineString>
+  <coordinates>
+  0, -85, 0.
+  0, -45, 0.
+   0, 0, 0. 
+   0, 45, 0.
+   0, 85, 0.
+  </coordinates>
+ </LineString>
+</Placemark>
+
+<Placemark>
+ <LineString>
+ <coordinates>
+ 10, -85, 0.
+ 10, -45, 0.
+ 10, 0, 0.
+ 10, 45, 0.
+ 10, 85, 0.
+ </coordinates>
+ </LineString>
+
+ </Placemark>
+ <Style>
+  <LineStyle>  
+   <color>#000000</color>
+   <width>2</width>
+  </LineStyle> 
+  </Style>
+</Document> </kml>
+<!--
+<?xml version="1.0" encoding="UTF-8"?> 
 <kml xmlns="http://earth.google.com/kml/2.0"> 
 <Document>
 <Placemark> 
@@ -12,7 +47,7 @@
   </coordinates>
  </LineString>
 </Placemark>
-<!--
+
 
 	<Placemark>
 <!--<styleUrl>#long/lat</styleUrl> --><!--
@@ -561,5 +596,7 @@
    <width>2</width>
   </LineStyle> 
   </Style>
-  -->
+ 
 </Document> </kml>
+ -->
+ 
