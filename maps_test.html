@@ -15,15 +15,16 @@
     <script type="text/javascript">
       function initialize() {
         var myOptions = {
-          center: new google.maps.LatLng(53.763325,-2.579041),
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          center: new google.maps.LatLng(0,0),
+          zoom: 4,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+		  preserveViewport: true
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"),
             myOptions);
-		map.setZoom(9);
-		var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?p=27", myOptions)
+		var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=19", myOptions);
 		kml.setMap(map);
+		map.setZoom(3);
       }
     </script>
   </head>
