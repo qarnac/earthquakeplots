@@ -1,4 +1,18 @@
 <!DOCTYPE html>
+
+<style type="text/css">
+.labels {
+     color: red;
+     background-color: white;
+     font-family: "Lucida Grande", "Arial", sans-serif;
+     font-size: 10px;
+     font-weight: bold;
+     text-align: center;
+     width: 65px;     
+     border: 2px solid black;
+     white-space: nowrap;
+   };
+   </style>
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -12,6 +26,9 @@
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAbQ2QrFsMaM8lch6tM_T_qVdZfKgZrFkg&sensor=false">
     </script>
+	<script type="text/javascript"
+      src="parser.js">
+    </script>
     <script type="text/javascript">
       function initialize() {
         var myOptions = {
@@ -22,10 +39,25 @@
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"),
             myOptions);
-		var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=19", myOptions);
+		var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=31", myOptions);
 		kml.setMap(map);
 		map.setZoom(3);
+		google.maps.event.addListener(map, 'click', function(event){
+			alert('Lat: ' + event.latLng.lat() + ' Lng: ' + event.latLng.lng());
+			});
+			
+		getEarthquakeInfo(list);
+		updateList("Hello World");
       }
+	  
+	  function updateList(newList){
+	  var list="";
+	  for(var i=0; i<newList.length; i=i+2){
+		list+= newList[i][11] + "<br /> Magnitude: " + newList[i][8];
+		list+="<br />";
+	  }
+		document.getElementById("list").innerHTML=list;
+	  }
     </script>
   </head>
   <body onload="initialize()">

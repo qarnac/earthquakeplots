@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <kml xmlns="http://earth.google.com/kml/2.0"> <Document>
 
+
 <Placemark>
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
+	<Title> The named line </Title>
 		<coordinates>
 -170 ,  -85, 0.
 -170 ,  0, 0.
@@ -448,6 +450,7 @@
 	</LineString>
 </Placemark>
 <Placemark>
+	<Title> The line </Title>
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
 		<coordinates>
@@ -555,6 +558,7 @@
 		</coordinates>
 	</LineString>
 </Placemark>
+
 
 <Style id="long/lat">
   <LineStyle>  
