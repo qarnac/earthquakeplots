@@ -25,7 +25,8 @@ var returnvalue=[];
 for(var i=0; i<data.length-2; i++){
 	returnvalue[i]=data[i+2].split(',');
 	for(var j=0; j<returnvalue[i].length; j++){
-		returnvalue[i][j]=returnvalue[i][j].replace('"',"");
+		returnvalue[i][j]=returnvalue[i][j].replace("&quot;", "");
+		returnvalue[i][j]=returnvalue[i][j].replace("&quot;", "");
 	}
  }
 return radixSort(returnvalue);
