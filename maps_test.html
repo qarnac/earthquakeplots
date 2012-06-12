@@ -26,48 +26,23 @@
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAbQ2QrFsMaM8lch6tM_T_qVdZfKgZrFkg&sensor=false">
     </script>
+    <script type="text/javascript" src="listFunctions.js" ></script>
+    <script type="text/javascript" src="map_functions.js"  ></script>
 	<script type="text/javascript"
       src="parser.js">
-    </script>
-    <script type="text/javascript">
-      function initialize() {
-        var myOptions = {
-          center: new google.maps.LatLng(0,0),
-          zoom: 4,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-		  preserveViewport: true
-        };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
-            myOptions);
-		var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=31", myOptions);
-		kml.setMap(map);
-		map.setZoom(3);
-		google.maps.event.addListener(map, 'click', function(event){
-			alert('Lat: ' + event.latLng.lat() + ' Lng: ' + event.latLng.lng());
-			});
-			
-		getEarthquakeInfo(list);
-		updateList("Hello World");
-      }
-	  
-	  function updateList(newList){
-	  var list="";
-	  for(var i=0; i<newList.length; i=i+2){
-		list+= newList[i][11] + "<br /> Magnitude: " + newList[i][8];
-		list+="<br />";
-	  }
-		document.getElementById("list").innerHTML=list;
-	  }
     </script>
   </head>
   <body onload="initialize()">
 	<div id="container" > 
 		<div id="list" style="float: left">
-			<script type="text/javascript">
-				//createList();
-			</script>
+		  <table id="earthquakeTable">
+		    <tr>
+		      <th> General Area </th>
+		      <th> Magnitude </th>
+		      </tr>
+		    </table>
 		</div>
-		<div id="map_canvas" style="float: left"></div>
+		<div id="map_canvas" style="float: right"></div>
 	</div>
   </body>
 </html>
