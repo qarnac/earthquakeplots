@@ -15,5 +15,4 @@ function initialize() {
 	});
 
     getEarthquakeInfo(list);
-    updateList("Hello World");
 }
