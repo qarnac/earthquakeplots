@@ -1,11 +1,13 @@
+var map;
+var myOptions;
 function initialize() {
-    var myOptions = {
+    myOptions = {
 	center: new google.maps.LatLng(0,0),
 	zoom: 4,
 	mapTypeId: google.maps.MapTypeId.ROADMAP,
 	preserveViewport: true
     };
-    var map = new google.maps.Map(document.getElementById("map_canvas"),
+    map = new google.maps.Map(document.getElementById("map_canvas"),
 				  myOptions);
     var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=31", myOptions);
     kml.setMap(map);
@@ -15,7 +17,10 @@ function initialize() {
 }
 
 function onMapClick(event){
-	alert("The map has been clicked");
-	if (compareLatLng(event.latLng.lat(), event.latLng.lng())) alert("hello");
+	if (compareLatLng(event.latLng.lat(), event.latLng.lng())) alert("Correct.");
+	else alert("Incorrect");
 }
 
+function center(lat, lng){
+	map.panTo(new google.maps.LatLng(lat, lng));
+}

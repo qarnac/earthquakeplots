@@ -35,6 +35,10 @@ function compareLatLng(lat, lng){
 	if(earthquakeList!=undefined &&
 	lat<=earthquakeList[selectedEarthquake][6]+1 && lat>=earthquakeList[selectedEarthquake][6]-1 &&
 	lng<=earthquakeList[selectedEarthquake][7]+1 && lng>=earthquakeList[selectedEarthquake][7]-1) return true;
+	
+	// For debugging purposes.
+	// Just centers the map on the Latitude/longitude of the selected earthquake.
+	center(earthquakeList[selectedEarthquake][6], earthquakeList[selectedEarthquake][7]);
 	return false;
 }
 
