@@ -3,6 +3,7 @@
 // This is the Earthquake currently being plotted on the map.
 // The value is it's slot in the earthquake array.
 var selectedEarthquake=0;
+var earthquakeList;
 
 function changeSelectedEarthquake(value){
     selectedEarthquake=value
@@ -26,10 +27,22 @@ function updateList(newList){
 		parent.appendChild(childB);
 		parent.setAttribute("onclick", "changeSelectedEarthquake(" + i + ")");
 		table.appendChild(parent);
-	
 	}
+	earthquakeList=newList;
 }
 
+function compareLatLng(lat, lng){
+	if(earthquakeList!=undefined &&
+	lat<=earthquakeList[selectedEarthquake][6]+1 && lat>=earthquakeList[selectedEarthquake][6]-1 &&
+	lng<=earthquakeList[selectedEarthquake][7]+1 && lng>=earthquakeList[selectedEarthquake][7]-1) return true;
+	return false;
+}
+
+
+// Used for debugging.
+// Creates a new <p> element under 
+// the table, and shows the number
+// of the selected earthquake.
 function showSelectedEarthquake(){
 	parent=document.createElement("p");
 	parent.textContent=selectedEarthquake;

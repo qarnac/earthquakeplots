@@ -10,9 +10,12 @@ function initialize() {
     var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=31", myOptions);
     kml.setMap(map);
     map.setZoom(3);
-    google.maps.event.addListener(map, 'click', function(event){
-	    alert('Lat: ' + event.latLng.lat() + ' Lng: ' + event.latLng.lng());
-	});
-
+    google.maps.event.addListener(map, 'click', onMapClick);
     getEarthquakeInfo(list);
 }
+
+function onMapClick(event){
+	alert("The map has been clicked");
+	if (compareLatLng(event.latLng.lat(), event.latLng.lng())) alert("hello");
+}
+
