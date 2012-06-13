@@ -30,6 +30,10 @@ for i in range(-80, 90, 10):
     print("\t\t",aOne,',',i,',',bOne)
     print("\t\t",aThree,',',i,',',bOne)
     printEnd()
+    printStart()
+    print("\t\t -135,",i,',',bOne)
+    print("\t\t-1,",i,',',bOne)
+    printEnd()
 	
 print(__file__)
 input()

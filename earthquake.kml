@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <kml xmlns="http://earth.google.com/kml/2.0"> <Document>
 
-
 <Placemark>
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
-	<Title> The named line </Title>
 		<coordinates>
 -170 ,  -85, 0.
 -170 ,  0, 0.
@@ -369,11 +367,29 @@
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
 		<coordinates>
+		 -135, -80 , 0.
+		-1, -80 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
 		 0 , -70 , 0.
 		 179 , -70 , 0.
 		 0 , -70 , 0.
 		 -179 , -70 , 0.
 		 179 , -70 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
+		 -135, -70 , 0.
+		-1, -70 , 0.
 		</coordinates>
 	</LineString>
 </Placemark>
@@ -393,11 +409,29 @@
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
 		<coordinates>
+		 -135, -60 , 0.
+		-1, -60 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
 		 0 , -50 , 0.
 		 179 , -50 , 0.
 		 0 , -50 , 0.
 		 -179 , -50 , 0.
 		 179 , -50 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
+		 -135, -50 , 0.
+		-1, -50 , 0.
 		</coordinates>
 	</LineString>
 </Placemark>
@@ -417,11 +451,29 @@
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
 		<coordinates>
+		 -135, -40 , 0.
+		-1, -40 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
 		 0 , -30 , 0.
 		 179 , -30 , 0.
 		 0 , -30 , 0.
 		 -179 , -30 , 0.
 		 179 , -30 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
+		 -135, -30 , 0.
+		-1, -30 , 0.
 		</coordinates>
 	</LineString>
 </Placemark>
@@ -441,6 +493,15 @@
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
 		<coordinates>
+		 -135, -20 , 0.
+		-1, -20 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
 		 0 , -10 , 0.
 		 179 , -10 , 0.
 		 0 , -10 , 0.
@@ -450,7 +511,15 @@
 	</LineString>
 </Placemark>
 <Placemark>
-	<Title> The line </Title>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
+		 -135, -10 , 0.
+		-1, -10 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
 		<coordinates>
@@ -459,6 +528,15 @@
 		 0 , 0 , 0.
 		 -179 , 0 , 0.
 		 179 , 0 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
+		 -135, 0 , 0.
+		-1, 0 , 0.
 		</coordinates>
 	</LineString>
 </Placemark>
@@ -478,11 +556,29 @@
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
 		<coordinates>
+		 -135, 10 , 0.
+		-1, 10 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
 		 0 , 20 , 0.
 		 179 , 20 , 0.
 		 0 , 20 , 0.
 		 -179 , 20 , 0.
 		 179 , 20 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
+		 -135, 20 , 0.
+		-1, 20 , 0.
 		</coordinates>
 	</LineString>
 </Placemark>
@@ -502,11 +598,29 @@
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
 		<coordinates>
+		 -135, 30 , 0.
+		-1, 30 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
 		 0 , 40 , 0.
 		 179 , 40 , 0.
 		 0 , 40 , 0.
 		 -179 , 40 , 0.
 		 179 , 40 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
+		 -135, 40 , 0.
+		-1, 40 , 0.
 		</coordinates>
 	</LineString>
 </Placemark>
@@ -526,11 +640,29 @@
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
 		<coordinates>
+		 -135, 50 , 0.
+		-1, 50 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
 		 0 , 60 , 0.
 		 179 , 60 , 0.
 		 0 , 60 , 0.
 		 -179 , 60 , 0.
 		 179 , 60 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
+		 -135, 60 , 0.
+		-1, 60 , 0.
 		</coordinates>
 	</LineString>
 </Placemark>
@@ -550,11 +682,29 @@
 	<styleUrl>#long/lat</styleUrl>
 	<LineString>
 		<coordinates>
+		 -135, 70 , 0.
+		-1, 70 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
 		 0 , 80 , 0.
 		 179 , 80 , 0.
 		 0 , 80 , 0.
 		 -179 , 80 , 0.
 		 179 , 80 , 0.
+		</coordinates>
+	</LineString>
+</Placemark>
+<Placemark>
+	<styleUrl>#long/lat</styleUrl>
+	<LineString>
+		<coordinates>
+		 -135, 80 , 0.
+		-1, 80 , 0.
 		</coordinates>
 	</LineString>
 </Placemark>

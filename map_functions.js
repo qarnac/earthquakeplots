@@ -9,7 +9,7 @@ function initialize() {
     };
     map = new google.maps.Map(document.getElementById("map_canvas"),
 				  myOptions);
-    var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=31", myOptions);
+    var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=35", myOptions);
     kml.setMap(map);
     map.setZoom(3);
     google.maps.event.addListener(map, 'click', onMapClick);
@@ -17,6 +17,7 @@ function initialize() {
 }
 
 function onMapClick(event){
+	alert(event.latLng.lat().toString() + " " + event.latLng.lng().toString());
 	if (compareLatLng(event.latLng.lat(), event.latLng.lng())) alert("Correct.");
 	else alert("Incorrect");
 }
