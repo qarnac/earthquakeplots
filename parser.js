@@ -20,16 +20,12 @@ function getEarthquakeInfo(divName){
 // Is given a csv as a string, and splits it into an array.
 // Current problem:  Doesn't ignore commas within a quote.
 function ParseToArrays(data){
-data=data.split("\n");
-var returnvalue=[];
-for(var i=0; i<data.length-2; i++){
-	returnvalue[i]=data[i+2].split(',');
-	for(var j=0; j<returnvalue[i].length; j++){
-		returnvalue[i][j]=returnvalue[i][j].replace("&quot;", "");
-		returnvalue[i][j]=returnvalue[i][j].replace("&quot;", "");
-	}
- }
-return radixSort(returnvalue);
+	data=data.split("\n");
+	var returnvalue=[];
+	for(var i=0; i<data.length-2; i++){
+		returnvalue[i]=data[i+2].split(',');
+		}
+	return radixSort(returnvalue);
 }
 
 // This function will not work with an earthquake that has a magnitude of 10.0

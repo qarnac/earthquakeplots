@@ -16,6 +16,10 @@ function updateList(newList){
 	var parent=document.createElement("tr");
 	childA=document.createElement("td");
 	childB=document.createElement("td");
+	// Temporary quotation mark fix.
+	newList[i][11]=newList[i][11].replace('&quot;', "");
+	newList[i][11]=newList[i][11].replace('&quot;', "");
+	
 	childA.textContent=newList[i][11];
 	childB.textContent=newList[i][8];
 	parent.appendChild(childA);
