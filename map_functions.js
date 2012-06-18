@@ -14,8 +14,8 @@ function initialize() {
     map.setZoom(3);
     google.maps.event.addListener(map, 'click', onMapClick);
     getEarthquakeInfo(list);
-	for(var i=-180; i<180; i=i+20){
-		for(var j=-80; j<80; j=j+20){
+	for(var i=-80; i<80; i=i+20){
+		for(var j=-180; j<180; j=j+20){
 			 var Options = {
 					 content: "(" + i +"&deg;, " + j +"&deg;)"
 					,boxStyle: {
@@ -26,7 +26,7 @@ function initialize() {
 					 }
 					,disableAutoPan: true
 					,pixelOffset: new google.maps.Size(-25, 0)
-					,position: new google.maps.LatLng(j, i)
+					,position: new google.maps.LatLng(i, j)
 					,closeBoxURL: ""
 					,isHidden: false
 					,pane: "mapPane"
@@ -42,7 +42,7 @@ function initialize() {
 
 function onMapClick(event){
 	alert(event.latLng.lat().toString() + " " + event.latLng.lng().toString());
-	if (compareLatLng(event.latLng.lat(), event.latLng.lng())) alert("Correct.");
+	if (compareLatLng(event.latLng.lat(), event.latLng.lng())) correctClick();
 	else alert("Incorrect");
 }
 

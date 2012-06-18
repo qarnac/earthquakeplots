@@ -13,6 +13,7 @@
 	  #container{height: 100%; width: 100%}
     .style1 {background-color:#ffffff;font-weight:bold;border:2px #006699 solid;}
 	.highlight{ background-color:#FFFF00; }
+	.correct{background-color:#00FF00; }
     </style>
     <script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAbQ2QrFsMaM8lch6tM_T_qVdZfKgZrFkg&sensor=false">
@@ -27,10 +28,12 @@
   <body onload="initialize()">
 	<div id="container" > 
 		<div id="list" style="float: left">
-		  <table id="earthquakeTable">
+		  <table id="earthquakeTable" borderColor=#000000 border=1>
 		    <tr>
 		      <th> General Area </th>
 		      <th> Magnitude </th>
+			  <th> Latitude </th>
+			  <th> Longitude </th>
 		      </tr>
 		    </table>
 		</div>
