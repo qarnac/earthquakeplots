@@ -6,6 +6,9 @@
 var selectedEarthquake=0;
 var earthquakeList;
 var isSelectable=[0,1,1,1,1,1];
+// If 0, Placemarks are shown.  If 1, they are hidden.
+var hidePlacemarks=true;
+var placemarkList=[];
 
 function changeSelectedEarthquake(value){
 	// If the earthquake has been deemed not selectable, just exit the function.
@@ -25,6 +28,7 @@ function plotEarthquake(slot){
 		title:earthquakeList[slot][11]
 	});
 	marker.setMap(map);
+	placemarkList.push(marker);
 }
 
 // Is called when the plot button is clicked.
@@ -36,7 +40,6 @@ function plotAllEarthquakes(){
 }
 
 // Is called when a user correctly places an earthquake on the map.
-// TODO:  Add a placemark on the correct location.
 function correctClick(){
 	// First, we want to make sure that the earthquake isn't selected again.
 	isSelectable[selectedEarthquake]=0;
@@ -67,9 +70,13 @@ function updateList(newList){
 		newList[i][11]=newList[i][11].replace('&quot;', "");
 		newList[i][11]=newList[i][11].replace('&quot;', "");
 
+		// Title
 		childA.textContent=newList[i][11];
+		//Magnitude
 		childB.textContent=newList[i][8];
+		// Latitude
 		childC.textContent=newList[i][6];
+		// Longitude
 		childD.textContent=newList[i][7];
 		parent.appendChild(childA);
 		parent.appendChild(childB);
@@ -81,6 +88,23 @@ function updateList(newList){
 	earthquakeList=newList;
 }
 
+// Is called when the Hide/Show visibility button is clicked.
+function invertPlacemarkVisibility(){
+	if(hidePlacemarks){
+		document.getElementById("Hide").textContent="Show Placemarks";
+		for(var i=0; i<placemarkList.length; i++){
+			placemarkList[i].setMap(null);
+		}
+	} else{
+	document.getElementById("Hide").textContent="Hide Placemarks";
+	for(var i=0; i<placemarkList.length; i++){
+			placemarkList[i].setMap(map);
+		}
+	}
+	hidePlacemarks=!hidePlacemarks;
+}
+
+// Is called when the map is clicked.  Compares the lat/lng of the click with the currently selected earthquake.
 function compareLatLng(lat, lng){
 	if(earthquakeList!=undefined &&
 	lat<=earthquakeList[selectedEarthquake][6]+5 && lat>=earthquakeList[selectedEarthquake][6]-5 &&
