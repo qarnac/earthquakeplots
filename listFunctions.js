@@ -17,6 +17,23 @@ function changeSelectedEarthquake(value){
 	earthquakes[selectedEarthquake].className="";
     selectedEarthquake=value
 }
+// Adds a placemark to indicate an earthquake given the
+// earthquakes location in earthquakeList.
+function plotEarthquake(slot){
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(earthquakeList[slot][6], earthquakeList[slot][7]),
+		title:earthquakeList[slot][11]
+	});
+	marker.setMap(map);
+}
+
+// Is called when the plot button is clicked.
+// goes through all of the earthquakes not shown on the table, and plots them.
+function plotAllEarthquakes(){
+	for(var i=6; i<earthquakeList.length; i++){
+		plotEarthquake(i);
+	}
+}
 
 // Is called when a user correctly places an earthquake on the map.
 // TODO:  Add a placemark on the correct location.
@@ -28,15 +45,13 @@ function correctClick(){
 	table=document.getElementById("earthquakeTable");
 	earthquakes=table.getElementsByTagName("tr");
 	earthquakes[selectedEarthquake].className="correct";
-	
-	var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(earthquakeList[selectedEarthquake][6], earthquakeList[selectedEarthquake][7]),
-    title:earthquakeList[selectedEarthquake][11]
-});
-	marker.setMap(map);
+
+	plotEarthquake(selectedEarthquake);
 	selectedEarthquake=0;
-	
+
 }
+
+
 
 // Is called once the csv has been retrieved and parsed.  Simply takes the top 5 earthquakes, and displays them in a table.
 function updateList(newList){
@@ -47,11 +62,11 @@ function updateList(newList){
 		childB=document.createElement("td");
 		childC=document.createElement("td");
 		childD=document.createElement("td");
-		
+
 		// Temporary quotation mark fix.
 		newList[i][11]=newList[i][11].replace('&quot;', "");
 		newList[i][11]=newList[i][11].replace('&quot;', "");
-	
+
 		childA.textContent=newList[i][11];
 		childB.textContent=newList[i][8];
 		childC.textContent=newList[i][6];
@@ -70,7 +85,7 @@ function compareLatLng(lat, lng){
 	if(earthquakeList!=undefined &&
 	lat<=earthquakeList[selectedEarthquake][6]+5 && lat>=earthquakeList[selectedEarthquake][6]-5 &&
 	lng<=earthquakeList[selectedEarthquake][7]+5 && lng>=earthquakeList[selectedEarthquake][7]-5) return true;
-	
+
 	// For debugging purposes.
 	// Just centers the map on the Latitude/longitude of the selected earthquake.
 	//center(earthquakeList[selectedEarthquake][6], earthquakeList[selectedEarthquake][7]);
