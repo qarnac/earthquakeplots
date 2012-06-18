@@ -29,6 +29,11 @@ function correctClick(){
 	earthquakes=table.getElementsByTagName("tr");
 	earthquakes[selectedEarthquake].className="correct";
 	
+	var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(earthquakeList[selectedEarthquake][6], earthquakeList[selectedEarthquake][7]),
+    title:earthquakeList[selectedEarthquake][11]
+});
+	marker.setMap(map);
 	selectedEarthquake=0;
 	
 }
@@ -63,8 +68,8 @@ function updateList(newList){
 
 function compareLatLng(lat, lng){
 	if(earthquakeList!=undefined &&
-	lat<=earthquakeList[selectedEarthquake][6]+2 && lat>=earthquakeList[selectedEarthquake][6]-2 &&
-	lng<=earthquakeList[selectedEarthquake][7]+2 && lng>=earthquakeList[selectedEarthquake][7]-2) return true;
+	lat<=earthquakeList[selectedEarthquake][6]+5 && lat>=earthquakeList[selectedEarthquake][6]-5 &&
+	lng<=earthquakeList[selectedEarthquake][7]+5 && lng>=earthquakeList[selectedEarthquake][7]-5) return true;
 	
 	// For debugging purposes.
 	// Just centers the map on the Latitude/longitude of the selected earthquake.
