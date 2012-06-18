@@ -39,12 +39,14 @@ function plotAllEarthquakes(){
 	}
 }
 
+// Is called when a user clicks on the map, and does not click on the correct earthquake location.
 function incorrectClick(){
+// If the Title row is selected, we don't want to mark it incorrect.
+	if(selectedEarthquake){
 	table=document.getElementById("earthquakeTable");
 	earthquakes=table.getElementsByTagName("tr");
 	earthquakes[selectedEarthquake].className="incorrect";
-
-	plotEarthquake(selectedEarthquake);
+	}
 }
 
 

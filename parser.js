@@ -24,7 +24,7 @@ function ParseToArrays(data){
 	var returnvalue=[];
 	for(var i=0; i<data.length-2; i++){
 		returnvalue[i]=data[i+2].split(',');
-		}
+	}
 	return radixSort(returnvalue);
 }
 

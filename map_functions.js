@@ -5,7 +5,8 @@ function initialize() {
 	center: new google.maps.LatLng(0,0),
 	zoom: 4,
 	mapTypeId: google.maps.MapTypeId.ROADMAP,
-	preserveViewport: true
+	preserveViewport: true,
+	minZoom:2
     };
     map = new google.maps.Map(document.getElementById("map_canvas"),
 				  myOptions);
@@ -16,8 +17,10 @@ function initialize() {
     getEarthquakeInfo(list);
 	for(var i=-80; i<80; i=i+20){
 		for(var j=-180; j<180; j=j+20){
+			var lng=(j<0)? "W":"E";
+			var lat=(i<0)?"S":"N"
 			 var Options = {
-					 content: "(" + i +"&deg;, " + j +"&deg;)"
+					 content: "(" + Math.abs(i) +"&deg; " + lat + "," + Math.abs(j) +"&deg;" + lng +")"
 					,boxStyle: {
 					   border: "0px solid black"
 					  ,textAlign: "center"
