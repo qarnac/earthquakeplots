@@ -6,8 +6,11 @@ var selectedEarthquake=0;
 var earthquakeList;
 
 function changeSelectedEarthquake(value){
+	table=document.getElementById("earthquakeTable");
+	earthquakes=table.getElementsByTagName("tr");
+	earthquakes[value].className="highlight";
+	earthquakes[selectedEarthquake].className="";
     selectedEarthquake=value
-	showSelectedEarthquake();
 }
 
 // Is called once the csv has been retrieved and parsed.  Simply takes the top 5 earthquakes, and displays them in a table.
@@ -43,10 +46,7 @@ function compareLatLng(lat, lng){
 }
 
 
-// Used for debugging.
-// Creates a new <p> element under 
-// the table, and shows the number
-// of the selected earthquake.
+// No longer needed for debugging purposes now that highlighting works.
 function showSelectedEarthquake(){
 	parent=document.createElement("p");
 	parent.textContent=selectedEarthquake;
