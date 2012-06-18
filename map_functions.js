@@ -41,9 +41,9 @@ function initialize() {
 
 
 function onMapClick(event){
-	alert(event.latLng.lat().toString() + " " + event.latLng.lng().toString());
+//	alert(event.latLng.lat().toString() + " " + event.latLng.lng().toString());
 	if (compareLatLng(event.latLng.lat(), event.latLng.lng())) correctClick();
-	else alert("Incorrect");
+	else incorrectClick();
 }
 
 function showLatLng(){

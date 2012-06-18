@@ -39,6 +39,15 @@ function plotAllEarthquakes(){
 	}
 }
 
+function incorrectClick(){
+	table=document.getElementById("earthquakeTable");
+	earthquakes=table.getElementsByTagName("tr");
+	earthquakes[selectedEarthquake].className="incorrect";
+
+	plotEarthquake(selectedEarthquake);
+}
+
+
 // Is called when a user correctly places an earthquake on the map.
 function correctClick(){
 	// First, we want to make sure that the earthquake isn't selected again.
