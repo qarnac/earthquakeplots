@@ -14,26 +14,52 @@ function initialize() {
     map.setZoom(3);
     google.maps.event.addListener(map, 'click', onMapClick);
     getEarthquakeInfo(list);
-	 var Options = {
-			 content: "0&deg;"
-			,boxStyle: {
-			   border: "0px solid black"
-			  ,textAlign: "center"
-			  ,fontSize: "8pt"
-			  ,width: "50px"
-			 }
-			,disableAutoPan: true
-			,pixelOffset: new google.maps.Size(-25, 0)
-			,position: new google.maps.LatLng(0, 0)
-			,closeBoxURL: ""
-			,isHidden: false
-			,pane: "mapPane"
-			,enableEventPropagation: true
-		};
+	for(var i=-180; i<180; i=i+20){
+		for(var j=-80; j<80; j=j+20){
+			 var Options = {
+					 content: i +"&deg;"
+					,boxStyle: {
+					   border: "0px solid black"
+					  ,textAlign: "center"
+					  ,fontSize: "8pt"
+					  ,width: "50px"
+					 }
+					,disableAutoPan: true
+					,pixelOffset: new google.maps.Size(-25, 0)
+					,position: new google.maps.LatLng(j, i)
+					,closeBoxURL: ""
+					,isHidden: false
+					,pane: "mapPane"
+					,enableEventPropagation: true
+				};
 
-		var ibLabel = new InfoBox(Options);
-		ibLabel.open(map);
-		map.panTo(new google.maps.LatLng(49.47216, -123.76307));
+				var ibLabel = new InfoBox(Options);
+				ibLabel.open(map);
+				}
+		}
+	for(var i=-70; i<70; i=i+20){
+		for(var j=-180; j<180; j=j+20){
+			 var Options = {
+					 content: i +"&deg;"
+					,boxStyle: {
+					   border: "0px solid black"
+					  ,textAlign: "center"
+					  ,fontSize: "8pt"
+					  ,width: "50px"
+					 }
+					,disableAutoPan: true
+					,pixelOffset: new google.maps.Size(-25, 0)
+					,position: new google.maps.LatLng(i, j)
+					,closeBoxURL: ""
+					,isHidden: false
+					,pane: "mapPane"
+					,enableEventPropagation: true
+				};
+
+				var ibLabel = new InfoBox(Options);
+				ibLabel.open(map);
+			}
+		}
 }
 
 function onMapClick(event){
