@@ -97,29 +97,42 @@ function invertPlacemarkVisibility(){
 	hidePlacemarks=!hidePlacemarks;
 }
 
+// Checks that the latitude and longitude are within the correct ranges.
+// if isLat==false, it's checking latitude.
+// if isLat==true, it's checking Longitude.
+function checkLatitude(lat, acceptRange, isLat){
+	var earthquakeLat=(isLat)? (Math.round(earthquakeList[selectedEarthquake][6])) : (Math.round(earthquakeList[selectedEarthquake][7]));
+	// Compares that the latitude is within the correct range.
+	var latlng=(isLat)? "Lat" : "lng";
+	console.log(latlng + " is: " + lat);
+	console.log(earthquakeLat-5);
+	console.log(earthquakeLat+5);
+	if(lat>=earthquakeLat-5 && lat<=earthquakeLat+5){
+		console.log("Within accept range");
+		if(earthquakeLat>=0){
+			if(lat>=earthquakeLat-(earthquakeLat%10) && lat<=earthquakeLat-(earthquakeLat&10)+10) return true;
+		} else{
+			bot=earthquakeLat-(earthquakeLat%10)
+			if(lat<=bot  && lat>=bot-10){
+				console.log("Within the correct lines");
+				return true;
+			} else {
+				bot=earthquakeLat-(earthquakeLat%10);
+				console.log(bot + " through " + (bot-10));
+			}
+		}
+	} else console.log("Not within accept range");
+	return false;
+}
 
 // Is called when the map is clicked.  Compares the lat/lng of the click with the currently selected earthquake.
 function compareLatLng(lat, lng){
 	// The amount of degrees off a student can be and still get the placement correct.
 	var acceptRange=5;
-	var earthquakeLat=earthquakeList[selectedEarthquake][6];
-	var earthquakeLng=earthquakeList[selectedEarthquake][7];
-	
-	// This if statement seems extremely long, would it better if I turned it into a nested if statement?
-	if(earthquakeList!=undefined &&
+	if(earthquakeList!=undefined){
 	// Makes sure that the earthquake is in the range
-	lat<=earthquakeLat+acceptRange && lat>=earthquakeLat-acceptRange &&
-	lng<=earthquakeLng+acceptRange && lng>=earthquakeLng-acceptRange &&
-	// Checks that the user isn't plotting on the wrong side of a lat/lng line.
-	lat>= earthquakeLat-(earthquakeLat%10) && lat <=earthquakeLat+(10-(earthquakeLat%10)) &&
-	lng>= earthquakeLng-(earthquakeLng%10) && lng<=earthquakeLng+(10-(earthquakeLng%10))
-	) return true;
-
-	// For debugging purposes.
-	// Just centers the map on the Latitude/longitude of the selected earthquake.
-	//center(earthquakeList[selectedEarthquake][6], earthquakeList[selectedEarthquake][7]);
-	
-	
+		if(checkLatitude(lat, acceptRange, true) && checkLatitude(lng, acceptRange,false)) return true;
+	}
 	return false;
 }
 

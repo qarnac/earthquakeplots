@@ -45,23 +45,22 @@ function initialize() {
 		}
 	}
 
-
+	
 function onMapClick(event){
 //	alert(event.latLng.lat().toString() + " " + event.latLng.lng().toString());
 	if (compareLatLng(event.latLng.lat(), event.latLng.lng())) correctClick();
 	else incorrectClick();
 }
 
-function showLatLng(){
-var label = new ELabel(new GLatLng(44.3,-78.8), "Utopia", "style1");
-}
 
 // Adds a placemark to indicate an earthquake given the
 // earthquakes location in earthquakeList.
-function plotEarthquake(slot){
+function plotEarthquake(slot, color){
+	if(color==undefined) color="blue";
 	var marker = new google.maps.Marker({
 		position: new google.maps.LatLng(earthquakeList[slot][6], earthquakeList[slot][7]),
-		title:earthquakeList[slot][11]
+		title:earthquakeList[slot][11],
+		icon: parseColorToIcon(color)
 	});
 	marker.setMap(map);
 	placemarkList.push(marker);
@@ -71,9 +70,22 @@ function plotEarthquake(slot){
 // goes through all of the earthquakes not shown on the table, and plots them.
 function plotAllEarthquakes(){
 	for(var i=6; i<earthquakeList.length; i++){
-		plotEarthquake(i);
+		plotEarthquake(i, changeMagToColor(earthquakeList[i][8]));
 	}
 }
+
+function changeMagToColor(mag){
+	if(mag<=3) return "green"
+	if(mag>3 && mag<5) return "orange"
+	if(mag>=5) return "red"
+}
+
+function parseColorToIcon(color){
+	if(color=="green") return "http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png";
+	if(color=="blue") return "http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png";
+	if(color=="orange") return "http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png";
+	if(color=="red") return "http://gmaps-samples.googlecode.com/svn/trunk/markers/red/blank.png";
+	}
 
 function center(lat, lng){
 	map.panTo(new google.maps.LatLng(lat, lng));
