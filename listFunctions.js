@@ -100,9 +100,20 @@ function invertPlacemarkVisibility(){
 
 // Is called when the map is clicked.  Compares the lat/lng of the click with the currently selected earthquake.
 function compareLatLng(lat, lng){
+	// The amount of degrees off a student can be and still get the placement correct.
+	var acceptRange=5;
+	var earthquakeLat=earthquakeList[selectedEarthquake][6];
+	var earthquakeLng=earthquakeList[selectedEarthquake][7];
+	
+	// This if statement seems extremely long, would it better if I turned it into a nested if statement?
 	if(earthquakeList!=undefined &&
-	lat<=earthquakeList[selectedEarthquake][6]+5 && lat>=earthquakeList[selectedEarthquake][6]-5 &&
-	lng<=earthquakeList[selectedEarthquake][7]+5 && lng>=earthquakeList[selectedEarthquake][7]-5) return true;
+	// Makes sure that the earthquake is in the range
+	lat<=earthquakeLat+acceptRange && lat>=earthquakeLat-acceptRange &&
+	lng<=earthquakeLng+acceptRange && lng>=earthquakeLng-acceptRange &&
+	// Checks that the user isn't plotting on the wrong side of a lat/lng line.
+	lat>= earthquakeLat-(earthquakeLat%10) && lat <=earthquakeLat+(10-(earthquakeLat%10)) &&
+	lng>= earthquakeLng-(earthquakeLng%10) && lng<=earthquakeLng+(10-(earthquakeLng%10))
+	) return true;
 
 	// For debugging purposes.
 	// Just centers the map on the Latitude/longitude of the selected earthquake.
