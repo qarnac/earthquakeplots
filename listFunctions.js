@@ -5,14 +5,19 @@
 // 0 indicates that no earthquake has been selected yet.
 var selectedEarthquake=0;
 var earthquakeList;
-var isSelectable=[0,1,1,1,1,1];
+// The number of earthquakes being shown in the table.
+var shownEarthquakes=10;
+// isSelectable has a 0 in slot 0 so the Title isn't selectable.
+// Then adds a 1 for evey row, indicating that the rows are selectable.
+var isSelectable=[0];
+for(var i=0; i<shownEarthquakes; i++) isSelectable.push(1);
 // If 0, Placemarks are shown.  If 1, they are hidden.
 var hidePlacemarks=true;
 var placemarkList=[];
 
 function changeSelectedEarthquake(value){
 	// If the earthquake has been deemed not selectable, just exit the function.
-	if(!isSelectable[value]) return; 
+	if(!isSelectable[value] || value==selectedEarthquake) return; 
 
 	table=document.getElementById("earthquakeTable");
 	earthquakes=table.getElementsByTagName("tr");
@@ -52,7 +57,7 @@ function correctClick(){
 // Is called once the csv has been retrieved and parsed.  Simply takes the top 5 earthquakes, and displays them in a table.
 function updateList(newList){
     var table=document.getElementById("earthquakeTable");
-    for (var i=1; i<6; i++){
+    for (var i=1; i<=shownEarthquakes; i++){
 		var parent=document.createElement("tr");
 		childA=document.createElement("td");
 		childB=document.createElement("td");

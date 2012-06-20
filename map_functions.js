@@ -27,8 +27,8 @@ function initialize() {
 					   border: "0px solid black"
 					  ,textAlign: "center"
 					  ,fontSize: "8pt"
-					  ,width: "120px"
-					  ,color: "#FF0000"
+					  ,width: "75px"
+					  ,color: "#000000"
 					 }
 					,disableAutoPan: true
 					,pixelOffset: new google.maps.Size(-25, 0)
@@ -57,9 +57,13 @@ function onMapClick(event){
 // earthquakes location in earthquakeList.
 function plotEarthquake(slot, color){
 	if(color==undefined) color="blue";
+	var text=earthquakeList[slot][11] + " Magnitude: " + earthquakeList[slot][8];
+	//Temporary quote fix.
+	text=text.replace('&quot;', "");
+	text=text.replace('&quot;', "");
 	var marker = new google.maps.Marker({
 		position: new google.maps.LatLng(earthquakeList[slot][6], earthquakeList[slot][7]),
-		title:earthquakeList[slot][11],
+		title:text,
 		icon: parseColorToIcon(color)
 	});
 	marker.setMap(map);
@@ -69,15 +73,15 @@ function plotEarthquake(slot, color){
 // Is called when the plot button is clicked.
 // goes through all of the earthquakes not shown on the table, and plots them.
 function plotAllEarthquakes(){
-	for(var i=6; i<earthquakeList.length; i++){
+	for(var i=shownEarthquakes+1; i<earthquakeList.length; i++){
 		plotEarthquake(i, changeMagToColor(earthquakeList[i][8]));
 	}
 }
 
 function changeMagToColor(mag){
-	if(mag<=3) return "green"
-	if(mag>3 && mag<5) return "orange"
-	if(mag>=5) return "red"
+	if(mag<=5) return "green"
+	if(mag>5 && mag<7) return "orange"
+	if(mag>=7) return "red"
 }
 
 function parseColorToIcon(color){
