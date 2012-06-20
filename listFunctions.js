@@ -37,6 +37,18 @@ function incorrectClick(){
 	}
 }
 
+// The front end will display all of the lat/lng values differently than they are being used
+// on the back end, so I'm making this function with the assumption it'll be used often.
+function displayLatLng(lat, isLat){
+	var suffix;
+	if(isLat) suffix=(lat>0)? 'N' : 'S';
+	else suffix=(lat>0)?'E':'W';
+	lat=Math.abs(lat);
+	lat*=10;
+	lat=Math.floor(lat);
+	lat/=10;
+	return lat + suffix;
+}
 
 // Is called when a user correctly places an earthquake on the map.
 function correctClick(){
@@ -73,9 +85,9 @@ function updateList(newList){
 		//Magnitude
 		childB.textContent=newList[i][8];
 		// Latitude
-		childC.textContent=newList[i][6];
+		childC.textContent=displayLatLng(newList[i][6], true);
 		// Longitude
-		childD.textContent=newList[i][7];
+		childD.textContent=displayLatLng(newList[i][7], false);
 		parent.appendChild(childA);
 		parent.appendChild(childB);
 		parent.appendChild(childC);
