@@ -1,10 +1,12 @@
 var map;
 var myOptions;
+
+// Initializes the google map object.
 function initialize() {
     myOptions = {
 	center: new google.maps.LatLng(0,0),
 	zoom: 4,
-	mapTypeId: google.maps.MapTypeId.ROADMAP,
+	mapTypeId: google.maps.MapTypeId.SATELLITE,
 	preserveViewport: true,
 	minZoom:2
     };
@@ -25,7 +27,8 @@ function initialize() {
 					   border: "0px solid black"
 					  ,textAlign: "center"
 					  ,fontSize: "8pt"
-					  ,width: "70px"
+					  ,width: "120px"
+					  ,color: "#FF0000"
 					 }
 					,disableAutoPan: true
 					,pixelOffset: new google.maps.Size(-25, 0)
@@ -51,6 +54,25 @@ function onMapClick(event){
 
 function showLatLng(){
 var label = new ELabel(new GLatLng(44.3,-78.8), "Utopia", "style1");
+}
+
+// Adds a placemark to indicate an earthquake given the
+// earthquakes location in earthquakeList.
+function plotEarthquake(slot){
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(earthquakeList[slot][6], earthquakeList[slot][7]),
+		title:earthquakeList[slot][11]
+	});
+	marker.setMap(map);
+	placemarkList.push(marker);
+}
+
+// Is called when the plot button is clicked.
+// goes through all of the earthquakes not shown on the table, and plots them.
+function plotAllEarthquakes(){
+	for(var i=6; i<earthquakeList.length; i++){
+		plotEarthquake(i);
+	}
 }
 
 function center(lat, lng){
