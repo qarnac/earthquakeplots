@@ -11,7 +11,7 @@ lineOne=" -85, 0."
 lineTwo=" 0, 0."
 lineThree=" 85, 0."
 
-for i in range(-170, 180, 10):
+for i in range(-170, 190, 10):
     printStart()
     print(i,',',lineOne)
     print(i,',',lineTwo)
@@ -34,6 +34,9 @@ for i in range(-80, 90, 10):
     print("\t\t -135,",i,',',bOne)
     print("\t\t-1,",i,',',bOne)
     printEnd()
+    printStart()
+    print("\t\t-160,",i,',',bOne)
+    print("\t\t-130,",i,',',bOne)
+    printEnd()
 	
-print(__file__)
 input()
