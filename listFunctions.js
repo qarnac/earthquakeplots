@@ -101,27 +101,19 @@ function invertPlacemarkVisibility(){
 // if isLat==false, it's checking latitude.
 // if isLat==true, it's checking Longitude.
 function checkLatitude(lat, acceptRange, isLat){
-	var earthquakeLat=(isLat)? (Math.round(earthquakeList[selectedEarthquake][6])) : (Math.round(earthquakeList[selectedEarthquake][7]));
+	var earthquakeLat=(isLat)? (Math.floor(earthquakeList[selectedEarthquake][6])) : (Math.floor(earthquakeList[selectedEarthquake][7]));
 	// Compares that the latitude is within the correct range.
-	var latlng=(isLat)? "Lat" : "lng";
-	console.log(latlng + " is: " + lat);
-	console.log(earthquakeLat-5);
-	console.log(earthquakeLat+5);
 	if(lat>=earthquakeLat-5 && lat<=earthquakeLat+5){
-		console.log("Within accept range");
+		// Makes sure that the point plotted is on the right side of the lat/lng lines.
 		if(earthquakeLat>=0){
-			if(lat>=earthquakeLat-(earthquakeLat%10) && lat<=earthquakeLat-(earthquakeLat&10)+10) return true;
+			var bot=earthquakeLat-(earthquakeLat%10);
+			if(lat>=bot && lat<=bot+10) return true;
+			// Negative numbers have to subtract 10 rather than add.
 		} else{
-			bot=earthquakeLat-(earthquakeLat%10)
-			if(lat<=bot  && lat>=bot-10){
-				console.log("Within the correct lines");
-				return true;
-			} else {
-				bot=earthquakeLat-(earthquakeLat%10);
-				console.log(bot + " through " + (bot-10));
-			}
+			var bot=earthquakeLat-(earthquakeLat%10)
+			if(lat<=bot  && lat>=bot-10) return true;
 		}
-	} else console.log("Not within accept range");
+	}
 	return false;
 }
 
