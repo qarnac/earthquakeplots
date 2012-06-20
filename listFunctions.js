@@ -20,24 +20,7 @@ function changeSelectedEarthquake(value){
 	earthquakes[selectedEarthquake].className="";
     selectedEarthquake=value
 }
-// Adds a placemark to indicate an earthquake given the
-// earthquakes location in earthquakeList.
-function plotEarthquake(slot){
-	var marker = new google.maps.Marker({
-		position: new google.maps.LatLng(earthquakeList[slot][6], earthquakeList[slot][7]),
-		title:earthquakeList[slot][11]
-	});
-	marker.setMap(map);
-	placemarkList.push(marker);
-}
 
-// Is called when the plot button is clicked.
-// goes through all of the earthquakes not shown on the table, and plots them.
-function plotAllEarthquakes(){
-	for(var i=6; i<earthquakeList.length; i++){
-		plotEarthquake(i);
-	}
-}
 
 // Is called when a user clicks on the map, and does not click on the correct earthquake location.
 function incorrectClick(){
@@ -62,7 +45,6 @@ function correctClick(){
 
 	plotEarthquake(selectedEarthquake);
 	selectedEarthquake=0;
-
 }
 
 
@@ -115,6 +97,7 @@ function invertPlacemarkVisibility(){
 	hidePlacemarks=!hidePlacemarks;
 }
 
+
 // Is called when the map is clicked.  Compares the lat/lng of the click with the currently selected earthquake.
 function compareLatLng(lat, lng){
 	if(earthquakeList!=undefined &&
@@ -124,6 +107,8 @@ function compareLatLng(lat, lng){
 	// For debugging purposes.
 	// Just centers the map on the Latitude/longitude of the selected earthquake.
 	//center(earthquakeList[selectedEarthquake][6], earthquakeList[selectedEarthquake][7]);
+	
+	
 	return false;
 }
 
