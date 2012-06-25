@@ -16,7 +16,8 @@ function initialize() {
     kml.setMap(map);
     map.setZoom(3);
     google.maps.event.addListener(map, 'click', onMapClick);
-    getEarthquakeInfo(list);
+	// getEarthquakeInfo is used to HTTPRequest the server for the list of earthquakes.
+    getEarthquakeInfo("list");
 	for(var i=-80; i<80; i=i+20){
 		for(var j=-180; j<180; j=j+20){
 			var lng=(j<0)? "W":"E";
