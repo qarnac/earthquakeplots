@@ -14,6 +14,8 @@ for(var i=0; i<shownEarthquakes; i++) isSelectable.push(1);
 // If 0, Placemarks are shown.  If 1, they are hidden.
 var hidePlacemarks=true;
 var placemarkList=[];
+// The amount of degrees off a student is allowed to be when placing earthquakes.
+var acceptRange=5;
 
 function changeSelectedEarthquake(value){
 	// If the earthquake has been deemed not selectable, just exit the function.
@@ -117,18 +119,20 @@ function invertPlacemarkVisibility(){
 // Checks that the latitude and longitude are within the correct ranges.
 // if isLat==false, it's checking latitude.
 // if isLat==true, it's checking Longitude.
-function checkLatitude(lat, acceptRange, isLat){
+function checkLatitude(lat, isLat){
 	var earthquakeLat=(isLat)? (Math.floor(earthquakeList[selectedEarthquake][6])) : (Math.floor(earthquakeList[selectedEarthquake][7]));
 	// Compares that the latitude is within the correct range.
-	if(lat>=earthquakeLat-5 && lat<=earthquakeLat+5){
+	if(lat>=earthquakeLat-acceptRange && lat<=earthquakeLat+acceptRange){
 		// Makes sure that the point plotted is on the right side of the lat/lng lines.
 		if(earthquakeLat>=0){
 			var bot=earthquakeLat-(earthquakeLat%10);
-			if(lat>=bot && lat<=bot+10) return true;
+			if(lat>=bot && lat<=bot+acceptRange*2) return true;
 			// Negative numbers have to subtract 10 rather than add.
+			if(earthquakeLat%10==0 && lat>=bot-acceptRange*2) return true;
 		} else{
 			var bot=earthquakeLat-(earthquakeLat%10)
-			if(lat<=bot  && lat>=bot-10) return true;
+			if(lat<=bot  && lat>=bot-acceptRange*2) return true;
+			if(earthquakeLat%10==0 && lat<=bot+acceptRange*2) return true;
 		}
 	}
 	return false;
@@ -140,7 +144,7 @@ function compareLatLng(lat, lng){
 	var acceptRange=5;
 	if(earthquakeList!=undefined){
 	// Makes sure that the earthquake is in the range
-		if(checkLatitude(lat, acceptRange, true) && checkLatitude(lng, acceptRange,false)) return true;
+		if(checkLatitude(lat, true) && checkLatitude(lng,false)) return true;
 	}
 	return false;
 }
