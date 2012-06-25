@@ -38,5 +38,8 @@ for i in range(-80, 90, 10):
     print("\t\t-160,",i,',',bOne)
     print("\t\t-130,",i,',',bOne)
     printEnd()
-	
+    printStart()
+    print("\t\t-170,",i,',',bOne)
+    print("\t\t-160,",i,',',bOne)
+    printEnd()
 input()

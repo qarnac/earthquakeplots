@@ -12,7 +12,7 @@ function initialize() {
     };
     map = new google.maps.Map(document.getElementById("map_canvas"),
 				  myOptions);
-    var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=36", myOptions);
+    var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=38", myOptions);
     kml.setMap(map);
     map.setZoom(3);
     google.maps.event.addListener(map, 'click', onMapClick);
