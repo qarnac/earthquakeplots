@@ -37,6 +37,30 @@
 		    </table>
 			<button id="Hide" onclick="invertPlacemarkVisibility()"> Hide Placemarks </button>
 			<button id="plotAllButton"  onclick="plotAllEarthquakes()"> Plot All Earthquakes</button>
+			<br />
+			<br />
+			<table id="legend" borderColor=#000000 border=1>
+				<tr>
+					<th> Icon </th>
+					<th> Meaning </th>
+				</tr>
+				<tr>
+					<td> <img src="http://gmaps-samples.googlecode.com/svn/trunk/markers/blue/blank.png" /> </td>
+					<td> Blue icons indicate that the earthquake was plotted by you.</td>
+				</tr>
+				<tr>
+					<td> <img src="http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png" /> </td>
+					<td> Green Icons indicate that the earthquake plotted has a magnitude below 5</td>
+				</tr>
+				<tr>
+					<td> <img src="http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png" /> </td>
+					<td> Orange Icons indicate that the earthquake has a magnitude between 5 and 7</td>
+				</tr>
+				<tr>
+					<td> <img src="http://gmaps-samples.googlecode.com/svn/trunk/markers/red/blank.png" /> </td>
+					<td> Red Icons indicate that the earthquake has a magnitude above 7 </td>
+				</tr>
+			</table>
 		</div>
 		<div id="map_canvas" style="float: right"></div>
 	</div>
