@@ -6,25 +6,28 @@
 var selectedEarthquake=0;
 var earthquakeList;
 // The number of earthquakes being shown in the table.
-var shownEarthquakes=10;
+var SHOWN_EARTHQUAKES=10;
 // isSelectable has a 0 in slot 0 so the Title isn't selectable.
 // Then adds a 1 for evey row, indicating that the rows are selectable.
 var isSelectable=[0];
-for(var i=0; i<shownEarthquakes; i++) isSelectable.push(1);
+for(var i=0; i<SHOWN_EARTHQUAKES; i++) isSelectable.push(1);
 // If 0, Placemarks are shown.  If 1, they are hidden.
 var hidePlacemarks=true;
 var placemarkList=[];
 // The amount of degrees off a student is allowed to be when placing earthquakes.
-var acceptRange=5;
+var ACCEPT_RANGE=5;
 
 function changeSelectedEarthquake(value){
 	// If the earthquake has been deemed not selectable, just exit the function.
-	if(!isSelectable[value] || value==selectedEarthquake) return; 
+	if(!isSelectable[value] || value==selectedEarthquake) return;
+	selectedEarthquake=value
+	
+	if(!tutorial.isHidden && tutorial.currentInstruction==1)
+	
 	table=document.getElementById("earthquakeTable");
 	earthquakes=table.getElementsByTagName("tr");
 	earthquakes[value].className="highlight";
 	earthquakes[selectedEarthquake].className="";
-    selectedEarthquake=value
 }
 
 
@@ -70,7 +73,7 @@ function correctClick(){
 // Is called once the csv has been retrieved, parsed, and sorted.  Simply takes the top 5 earthquakes, and displays them in a table.
 function updateList(newList){
     var table=document.getElementById("earthquakeTable");
-    for (var i=1; i<=shownEarthquakes; i++){
+    for (var i=1; i<=SHOWN_EARTHQUAKES; i++){
 		var parent=document.createElement("tr");
 		childA=document.createElement("td");
 		childB=document.createElement("td");
@@ -84,11 +87,11 @@ function updateList(newList){
 		// Title
 		childA.textContent=newList[i][11];
 		//Magnitude
-		childB.textContent=newList[i][8];
+		childB.textContent=newList[i][MAGNITUDE];
 		// Latitude
-		childC.textContent=displayLatLng(newList[i][6], true);
+		childC.textContent=displayLatLng(newList[i][LATITUDE], true);
 		// Longitude
-		childD.textContent=displayLatLng(newList[i][7], false);
+		childD.textContent=displayLatLng(newList[i][LONGITUDE], false);
 		parent.appendChild(childA);
 		parent.appendChild(childB);
 		parent.appendChild(childC);
@@ -120,19 +123,19 @@ function invertPlacemarkVisibility(){
 // if isLat==false, it's checking latitude.
 // if isLat==true, it's checking Longitude.
 function checkLatitude(lat, isLat){
-	var earthquakeLat=(isLat)? (Math.floor(earthquakeList[selectedEarthquake][6])) : (Math.floor(earthquakeList[selectedEarthquake][7]));
+	var earthquakeLat=(isLat)? (Math.floor(earthquakeList[selectedEarthquake][LATITUDE])) : (Math.floor(earthquakeList[selectedEarthquake][LONGITUDE]));
 	// Compares that the latitude is within the correct range.
-	if(lat>=earthquakeLat-acceptRange && lat<=earthquakeLat+acceptRange){
+	if(lat>=earthquakeLat-ACCEPT_RANGE && lat<=earthquakeLat+ACCEPT_RANGE){
 		// Makes sure that the point plotted is on the right side of the lat/lng lines.
 		if(earthquakeLat>=0){
 			var bot=earthquakeLat-(earthquakeLat%10);
-			if(lat>=bot && lat<=bot+acceptRange*2) return true;
+			if(lat>=bot && lat<=bot+ACCEPT_RANGE*2) return true;
 			// Negative numbers have to subtract 10 rather than add.
-			if(earthquakeLat%10==0 && lat>=bot-acceptRange*2) return true;
+			if(earthquakeLat%10==0 && lat>=bot-ACCEPT_RANGE*2) return true;
 		} else{
 			var bot=earthquakeLat-(earthquakeLat%10)
-			if(lat<=bot  && lat>=bot-acceptRange*2) return true;
-			if(earthquakeLat%10==0 && lat<=bot+acceptRange*2) return true;
+			if(lat<=bot  && lat>=bot-ACCEPT_RANGE*2) return true;
+			if(earthquakeLat%10==0 && lat<=bot+ACCEPT_RANGE*2) return true;
 		}
 	}
 	return false;
@@ -145,16 +148,14 @@ function flashFirstEarthquake(){
 								if(earthquake.className=="highlight") earthquake.className="";
 								else earthquake.className="highlight";
 								if(selectedEarthquake==1){
-									window.clearInterval(interval);
 									earthquake.className="highlight";
-									tutorial.eventFinished=true;
+									tutorial.eventFinished();
+									window.clearInterval(interval);
 								}}, 500);
 }
 
 // Is called when the map is clicked.  Compares the lat/lng of the click with the currently selected earthquake.
 function compareLatLng(lat, lng){
-	// The amount of degrees off a student can be and still get the placement correct.
-	var acceptRange=5;
 	if(earthquakeList!=undefined){
 	// Makes sure that the earthquake is in the range
 		if(checkLatitude(lat, true) && checkLatitude(lng,false)) return true;

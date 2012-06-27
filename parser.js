@@ -1,3 +1,7 @@
+var MAGNITUDE=8;
+var LATITUDE=6;
+var LONGITUDE=7;
+
 // Calls parser.php to get the earthquake list, and then calls parseToArrays to parse it.
 function getEarthquakeInfo(divName){
 	var request=new XMLHttpRequest();
@@ -35,14 +39,14 @@ function radixSort(data){
     for(var i=0; i<10; i++) buckets[i]=[];
     // The 8th slot in the data array contains the magnitude of the earthquake.
     for(var i=0; i<data.length; i++){ 
-	if(data[i][8]!=undefined) buckets[data[i][8].charAt(2)].push(data[i]);
+	if(data[i][MAGNITUDE]!=undefined) buckets[data[i][MAGNITUDE].charAt(2)].push(data[i]);
     }
     data=[];
     data=buckets[9].concat( buckets[8], buckets[7], buckets[6], buckets[5]
 			    ,buckets[4], buckets[3], buckets[2], buckets[1], buckets[0]);
 
     for(var i=0; i<10; i++) buckets[i]=[];   
- for(var i=0; i<data.length; i++) buckets[data[i][8].charAt(0)].push(data[i]);
+ for(var i=0; i<data.length; i++) buckets[data[i][MAGNITUDE].charAt(0)].push(data[i]);
     data=[];
     data=buckets[9].concat( buckets[8], buckets[7], buckets[6], buckets[5]
 			    ,buckets[4], buckets[3], buckets[2], buckets[1], buckets[0]);

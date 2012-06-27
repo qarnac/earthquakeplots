@@ -1,4 +1,6 @@
 var map;
+var CHECK_CENTER_RANGE=30;
+
 // Initializes the google map object.
 function initialize() {
     var myOptions = {
@@ -56,12 +58,12 @@ function onMapClick(event){
 // earthquakes location in earthquakeList.
 function plotEarthquake(slot, color){
 	if(color==undefined) color="blue";
-	var text=earthquakeList[slot][11] + " Magnitude: " + earthquakeList[slot][8];
+	var text=earthquakeList[slot][11] + " Magnitude: " + earthquakeList[slot][MAGNITUDE];
 	//Temporary quote fix.
 	text=text.replace('&quot;', "");
 	text=text.replace('&quot;', "");
 	var marker = new google.maps.Marker({
-		position: new google.maps.LatLng(earthquakeList[slot][6], earthquakeList[slot][7]),
+		position: new google.maps.LatLng(earthquakeList[slot][LATITUDE], earthquakeList[slot][LONGITUDE]),
 		title:text,
 		icon: parseColorToIcon(color)
 	});
@@ -81,6 +83,21 @@ function changeMagToColor(mag){
 	if(mag<=5) return "green"
 	if(mag>5 && mag<7) return "orange"
 	if(mag>=7) return "red"
+}
+
+
+function checkIfNearCenter(){
+		var interval=setInterval(function(){
+			var center=map.getCenter();
+			console.log("Center is currently: " + center.lat() + " " + center.lng());
+			if(center.lat()>=earthquakeList[selectedEarthquake][LATITUDE]-CHECK_CENTER_RANGE && center.lat()<=earthquakeList[selectedEarthquake][LATITUDE]+CHECK_CENTER_RANGE){
+				if(center.lng()>=earthquakeList[selectedEarthquake][LONGITUDE]-CHECK_CENTER_RANGE && center.lng()<=earthquakeList[selectedEarthquake][LONGITUDE]+CHECK_CENTER_RANGE){
+					tutorial.eventFinished();
+					window.clearInterval(interval);
+				}
+			}
+		
+		}, 500);
 }
 
 function parseColorToIcon(color){

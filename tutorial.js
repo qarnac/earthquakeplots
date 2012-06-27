@@ -18,12 +18,17 @@ function instructionBox(){
 	this.currentInstruction=0;
 	// The array of strings which are used for each instruction.
 	this.instructionString=["Hello, and welcome to Earthquake Plots!",
-							"The first step to plotting an earthquake is to decide which earthquake you want to plot.  Go ahead and select the first earthquake by clicking on the flashing row in the table.",
-							"Final"];
-	this.style="position: absolute; border:1; z-index:5; background-color:#ffffff; border-color:#000000;";
+							"The first step to plotting an earthquake is to decide which earthquake you want to plot.  Go ahead and select the first earthquake by clicking on the flashing row in the table.  Once selected, the row will stop flashing.",
+							"Next, we want to plot this earthquake on the map.  Currently, the map is centered at 0,0.  Please drag the map until the latitude and longitude of the selected earthquake are near the middle of the map.  When you're close, the next button will light up.",
+							"Now that you're over the location, simply left click on the map where you think the earthquake was.  If you guess correctly, the highlighted row will turn green.  If you get it wrong, the row will turn red.",
+							"Good Job!"
+							];
+	this.style="position: absolute; border:1; z-index:5; background-color:#ffffff; border-color:#000000; width:400px;";
 	// using the this keyword will not work in functions called by events.  The event object will be the this.
 	// Due to this, it is needed to create a variable to hold the this, to use it in functions.
 	var self=this;
+	
+	this.isHidden=false;
 	//define class-wide functions
 	
 	
@@ -49,6 +54,7 @@ function instructionBox(){
 
 	// Is called when an event is completed.  Enables the next button.
 	this.eventFinished=function(){
+		console.log("event successfully finished");
 		document.getElementById("next").disabled=false;
 	}
 	// This function is called then the previous button is pushed by the user.
@@ -95,7 +101,7 @@ function instructionBox(){
 	addButton("previous", this.parent, this.previous);
 	addButton("hide", this.parent, this.hide);
 	addButton("next", this.parent, this.next);
-	this.moveTo(100, 50);
+	this.moveTo(400, 50);
 }
 
 
@@ -104,6 +110,9 @@ function tutorialInteractions(instruction){
 	if(instruction==1){
 		flashFirstEarthquake();
 		document.getElementById("next").disabled=true;
+	} else if(instruction==2){
+		checkIfNearCenter();
+	    document.getElementById("next").disabled=true;
 	}
 }
 // Now we need to create an instance of this object
