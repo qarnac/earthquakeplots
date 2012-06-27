@@ -28,7 +28,6 @@ function instructionBox(){
 	// Due to this, it is needed to create a variable to hold the this, to use it in functions.
 	var self=this;
 	
-	this.isHidden=false;
 	//define class-wide functions
 	
 	
@@ -43,7 +42,7 @@ function instructionBox(){
 		// Now that everything involving the previous currentInstruction value is done, we increment it.
 		self.currentInstruction++;
 		// If the user landed on an instruction that does not exist, we want to get rid of the instruction box.
-		if(self.currentInstruction>self.instructionString.length) return this.hide(true);
+		if(self.currentInstruction>self.instructionString.length) return this.hide();
 		// If there are no more instructions, don't allow the user to click next.
 		if(self.currentInstruction+1>=self.instructionString.length) this.disabled=true;
 		if(self.currentInstruction==1) document.getElementById("previous").disabled=false;
@@ -60,7 +59,7 @@ function instructionBox(){
 	// This function is called then the previous button is pushed by the user.
 	this.previous=function(){
 		// If the user is somehow on a negative instruction, 
-		if(this.currentInstruction<=0) return self.hide(true);
+		if(this.currentInstruction<=0) return self.hide();
 		
 		self.currentInstruction--;
 		//If the first instruction is selected, we want to hide the previous button.
@@ -69,20 +68,15 @@ function instructionBox(){
 		self.text.innerHTML=self.instructionString[self.currentInstruction];
 	}
 	
-	// FUNCTION NOT FINISHED
 	this.hide=function(calledByError){
-	// The calledByError variable is so that way anything that might cause an error with the instructionBox
-	// can be reset here to make it work again.
-	if(calledByError) self.currentInstruction=0;
-	
+	self.parent.parentNode.removeChild(self.parent);
 	}
 	
 	
 	
 	// now do the intialize code here.
 	// Reason for initializing here is so that we can use the functions created above in onClickListeners
-		this.parent=document.createElement("div");
-	
+	this.parent=document.createElement("div");
 	
 	// I didn't know if I could use document.getElementById().innerHTML because
 	// I'm not sure if that would just return a string or a pointer to the string.
