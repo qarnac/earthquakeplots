@@ -1,9 +1,7 @@
 var map;
-var myOptions;
-
 // Initializes the google map object.
 function initialize() {
-    myOptions = {
+    var myOptions = {
 	center: new google.maps.LatLng(0,0),
 	zoom: 4,
 	mapTypeId: google.maps.MapTypeId.SATELLITE,

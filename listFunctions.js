@@ -68,7 +68,7 @@ function correctClick(){
 
 
 
-// Is called once the csv has been retrieved and parsed.  Simply takes the top 5 earthquakes, and displays them in a table.
+// Is called once the csv has been retrieved, parsed, and sorted.  Simply takes the top 5 earthquakes, and displays them in a table.
 function updateList(newList){
     var table=document.getElementById("earthquakeTable");
     for (var i=1; i<=shownEarthquakes; i++){
@@ -98,6 +98,7 @@ function updateList(newList){
 		table.appendChild(parent);
 	}
 	earthquakeList=newList;
+	var tutorial=new instructionBox();
 }
 
 // Is called when the Hide/Show visibility button is clicked.
@@ -147,12 +148,4 @@ function compareLatLng(lat, lng){
 		if(checkLatitude(lat, true) && checkLatitude(lng,false)) return true;
 	}
 	return false;
-}
-
-
-// No longer needed for debugging purposes now that highlighting works.
-function showSelectedEarthquake(){
-	parent=document.createElement("p");
-	parent.textContent=selectedEarthquake;
-	document.getElementById("list").appendChild(parent);
 }
