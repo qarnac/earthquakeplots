@@ -15,16 +15,19 @@ function instructionBox(){
 	// currentInstruction will hold which step of the instructions the student is at.
 	this.currentInstruction=0;
 	// The array of strings which are used for each instruction.
-	this.instructionString=["Hello",  "World"];
+	this.instructionString=["Hello, and welcome to Earthquake Plots!",  "World"];
 	this.style="position: absolute; border:1; z-index:5; background-color:#ffffff; border-color:#000000;";
-	
+	// using the this keyword will not work in functions called by events.  The event object will be the this.
+	// Due to this, it is needed to create a variable to hold the this, to use it in functions.
+	// Not sure why  I can call self in the functions, but not the this variables.  Will have to look into that.
+	var self=this;
 	//define class-wide functions
 	
 	
 	// Moves the top left corner of the instructionBox to the given location.
 	this.moveTo=function(x, y){
-		var newStyle=this.style + " left:" + x + "px; top:" + y + "px;";
-		this.parent.setAttribute('style', newStyle);
+		var newStyle=self.style + " left:" + x + "px; top:" + y + "px;";
+		self.parent.setAttribute('style', newStyle);
 		console.log(newStyle);
 	}
 	// This function is called when the next button is pushed by the user.
@@ -33,33 +36,34 @@ function instructionBox(){
 		// Since there is now a previous instruction to show, we want the user to be able to hide the previous instruction.
 //		if(currentInstruction==0) document.getElementById("previous").show();
 		// Now that everything involving the previous currentInstruction value is done, we increment it.
-		this.currentInstruction++;
+		self.currentInstruction++;
+		console.log(self.currentInstruction);
 		// If the user landed on an instruction that does not exist, we want to get rid of the instruction box.
-		if(this.currentInstruction>this.instructionStrings.length) return this.hide(true);
+		if(self.currentInstruction>self.instructionString.length) return this.hide(true);
 		// If there are no more instructions, don't allow the user to click next.
 //		if(currentInstruction+1>instructionStrings.length) document.getElementById("next").hide();
 		
-		this.text.innerHTML=this.instructionStrings[currentInstruction];
+		self.text.innerHTML=self.instructionString[self.currentInstruction];
 	}
 	
 	// This function is called then the previous button is pushed by the user.
 	this.previous=function(){
 	alert("previous");
 		// If the user is somehow on a negative instruction, 
-		if(this.currentInstruction<=0) return this.hide(true);
+		if(this.currentInstruction<=0) return self.hide(true);
 		
-		this.currentInstruction++;
+		self.currentInstruction--;
 		//If the first instruction is selected, we want to hide the previous button.
 //		if(currentInstruction==0) document.getElementById("previous").hide();
-		this.text.innerHTML=this.instructionStrings[currentInstruction];
+		self.text.innerHTML=self.instructionString[self.currentInstruction];
 	}
 	
-	// FUNCTION STILL NEEDS FIXING.
+	// FUNCTION NOT FINISHED
 	this.hide=function(calledByError){
 	alert("hide");
 	// The calledByError variable is so that way anything that might cause an error with the instructionBox
 	// can be reset here to make it work again.
-	if(calledByError) this.currentInstruction=0;
+	if(calledByError) self.currentInstruction=0;
 	
 	}
 	
@@ -78,7 +82,7 @@ function instructionBox(){
 	// The element within the document that will be used to display the strings.
 	this.text=document.createElement("p");
 
-	this.text.textContent="Hello World";
+	this.text.textContent=this.instructionString[0];
 	this.parent.appendChild(this.text);
 //	document.getElementById("previous").hide();
 	document.getElementById("container").appendChild(this.parent);
