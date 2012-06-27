@@ -1,5 +1,4 @@
-var defaultTutorialBoxStyle="position: absolute; top: 0; left: 0; border:1; z-index:5; background-color:#ffffff"
-
+// Adds a button to the parent given.  Used by the instructionBox class.
 function addButton(title, parent, onClickFunction){
 	var button=document.createElement("button");
 	button.textContent=title;
@@ -17,11 +16,20 @@ function instructionBox(){
 	this.currentInstruction=0;
 	// The array of strings which are used for each instruction.
 	this.instructionString=["Hello",  "World"];
+	this.style="position: absolute; border:1; z-index:5; background-color:#ffffff; border-color:#000000;";
 	
 	//define class-wide functions
 	
+	
+	// Moves the top left corner of the instructionBox to the given location.
+	this.moveTo=function(x, y){
+		var newStyle=this.style + " left:" + x + "px; top:" + y + "px;";
+		this.parent.setAttribute('style', newStyle);
+		console.log(newStyle);
+	}
 	// This function is called when the next button is pushed by the user.
 	this.next=function(){
+		alert("next");
 		// Since there is now a previous instruction to show, we want the user to be able to hide the previous instruction.
 //		if(currentInstruction==0) document.getElementById("previous").show();
 		// Now that everything involving the previous currentInstruction value is done, we increment it.
@@ -36,6 +44,7 @@ function instructionBox(){
 	
 	// This function is called then the previous button is pushed by the user.
 	this.previous=function(){
+	alert("previous");
 		// If the user is somehow on a negative instruction, 
 		if(this.currentInstruction<=0) return this.hide(true);
 		
@@ -47,6 +56,7 @@ function instructionBox(){
 	
 	// FUNCTION STILL NEEDS FIXING.
 	this.hide=function(calledByError){
+	alert("hide");
 	// The calledByError variable is so that way anything that might cause an error with the instructionBox
 	// can be reset here to make it work again.
 	if(calledByError) this.currentInstruction=0;
@@ -71,13 +81,13 @@ function instructionBox(){
 	this.text.textContent="Hello World";
 	this.parent.appendChild(this.text);
 //	document.getElementById("previous").hide();
-	this.parent.setAttribute('style', defaultTutorialBoxStyle);
 	document.getElementById("container").appendChild(this.parent);
 	// Now we got the text to show, lets add buttons to the bottom of the element.
 	
-	addButton("previous", this.parent, this.previous());
-	addButton("hide", this.parent, this.hide());
-	addButton("next", this.parent, this.hide());
+	addButton("previous", this.parent, this.previous);
+	addButton("hide", this.parent, this.hide);
+	addButton("next", this.parent, this.next);
+	this.moveTo(100, 50);
 }
 
 // Now we need to create an instance of this object
