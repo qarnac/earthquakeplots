@@ -21,7 +21,7 @@ function instructionBox(){
 							"The first step to plotting an earthquake is to decide which earthquake you want to plot.  Go ahead and select the first earthquake by clicking on the flashing row in the table.  Once selected, the row will stop flashing.",
 							"Next, we want to plot this earthquake on the map.  Currently, the map is centered at 0,0.  Please drag the map until the latitude and longitude of the selected earthquake are near the middle of the map.  When you're close, the next button will light up.",
 							"Now that you're over the location, simply left click on the map where you think the earthquake was.  If you guess correctly, the highlighted row will turn green.  If you get it wrong, the row will turn red.",
-							"Good Job!"
+							"Good Job!  Once you plot all 10 of the earthquakes in the table, click on the Plot All Earthquakes button to plot all of the earthquakes that have happened within the last 30 days!"
 							];
 	this.style="position: absolute; border:1; z-index:5; background-color:#ffffff; border-color:#000000; width:400px;";
 	// using the this keyword will not work in functions called by events.  The event object will be the this.
@@ -113,6 +113,9 @@ function tutorialInteractions(instruction){
 	} else if(instruction==2){
 		checkIfNearCenter();
 	    document.getElementById("next").disabled=true;
+	} else if(instruction==3){
+		isPlottedCorrectly();
+		document.getElementById("next").disabled=true;
 	}
 }
 // Now we need to create an instance of this object

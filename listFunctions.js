@@ -22,8 +22,6 @@ function changeSelectedEarthquake(value){
 	if(!isSelectable[value] || value==selectedEarthquake) return;
 	selectedEarthquake=value
 	
-	if(!tutorial.isHidden && tutorial.currentInstruction==1)
-	
 	table=document.getElementById("earthquakeTable");
 	earthquakes=table.getElementsByTagName("tr");
 	earthquakes[value].className="highlight";
@@ -141,6 +139,8 @@ function checkLatitude(lat, isLat){
 	return false;
 }
 
+// This function controls the first event.  It will make the first earthquake flash until it is selected,
+// and then when selected it will tell the tutorial it can continue.
 function flashFirstEarthquake(){
 	var table=document.getElementById("earthquakeTable");
 	var earthquake=table.getElementsByTagName("tr")[1];
@@ -152,6 +152,17 @@ function flashFirstEarthquake(){
 									tutorial.eventFinished();
 									window.clearInterval(interval);
 								}}, 500);
+}
+
+function isPlottedCorrectly(){
+	var table=document.getElementById("earthquakeTable");
+	var earthquake=table.getElementsByTagName("tr")[1];
+	var interval=setInterval(function(){ 
+		if(earthquake.className=="correct"){
+			tutorial.eventFinished();
+			window.clearInterval(interval);
+		}
+	}, 500);
 }
 
 // Is called when the map is clicked.  Compares the lat/lng of the click with the currently selected earthquake.
