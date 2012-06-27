@@ -20,7 +20,6 @@ var acceptRange=5;
 function changeSelectedEarthquake(value){
 	// If the earthquake has been deemed not selectable, just exit the function.
 	if(!isSelectable[value] || value==selectedEarthquake) return; 
-
 	table=document.getElementById("earthquakeTable");
 	earthquakes=table.getElementsByTagName("tr");
 	earthquakes[value].className="highlight";
@@ -98,7 +97,7 @@ function updateList(newList){
 		table.appendChild(parent);
 	}
 	earthquakeList=newList;
-	var tutorial=new instructionBox();
+	tutorial=new instructionBox();
 }
 
 // Is called when the Hide/Show visibility button is clicked.
@@ -137,6 +136,19 @@ function checkLatitude(lat, isLat){
 		}
 	}
 	return false;
+}
+
+function flashFirstEarthquake(){
+	var table=document.getElementById("earthquakeTable");
+	var earthquake=table.getElementsByTagName("tr")[1];
+	var interval=setInterval(function(){ console.log("highlight");
+								if(earthquake.className=="highlight") earthquake.className="";
+								else earthquake.className="highlight";
+								if(selectedEarthquake==1){
+									window.clearInterval(interval);
+									earthquake.className="highlight";
+									tutorial.eventFinished=true;
+								}}, 500);
 }
 
 // Is called when the map is clicked.  Compares the lat/lng of the click with the currently selected earthquake.

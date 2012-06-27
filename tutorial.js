@@ -1,8 +1,10 @@
+var tutorial;
 // Adds a button to the parent given.  Used by the instructionBox class.
 function addButton(title, parent, onClickFunction){
 	var button=document.createElement("button");
 	button.textContent=title;
 	button.onclick=onClickFunction;
+	button.setAttribute("id", title);
 	parent.appendChild(button);
 }
 
@@ -15,11 +17,12 @@ function instructionBox(){
 	// currentInstruction will hold which step of the instructions the student is at.
 	this.currentInstruction=0;
 	// The array of strings which are used for each instruction.
-	this.instructionString=["Hello, and welcome to Earthquake Plots!",  "World"];
+	this.instructionString=["Hello, and welcome to Earthquake Plots!",
+							"The first step to plotting an earthquake is to decide which earthquake you want to plot.  Go ahead and select the first earthquake by clicking on the flashing row in the table.",
+							"Final"];
 	this.style="position: absolute; border:1; z-index:5; background-color:#ffffff; border-color:#000000;";
 	// using the this keyword will not work in functions called by events.  The event object will be the this.
 	// Due to this, it is needed to create a variable to hold the this, to use it in functions.
-	// Not sure why  I can call self in the functions, but not the this variables.  Will have to look into that.
 	var self=this;
 	//define class-wide functions
 	
@@ -32,35 +35,36 @@ function instructionBox(){
 	}
 	// This function is called when the next button is pushed by the user.
 	this.next=function(){
-		alert("next");
-		// Since there is now a previous instruction to show, we want the user to be able to hide the previous instruction.
-//		if(currentInstruction==0) document.getElementById("previous").show();
 		// Now that everything involving the previous currentInstruction value is done, we increment it.
 		self.currentInstruction++;
-		console.log(self.currentInstruction);
 		// If the user landed on an instruction that does not exist, we want to get rid of the instruction box.
 		if(self.currentInstruction>self.instructionString.length) return this.hide(true);
 		// If there are no more instructions, don't allow the user to click next.
-//		if(currentInstruction+1>instructionStrings.length) document.getElementById("next").hide();
-		
+		if(self.currentInstruction+1>=self.instructionString.length) this.disabled=true;
+		if(self.currentInstruction==1) document.getElementById("previous").disabled=false;
 		self.text.innerHTML=self.instructionString[self.currentInstruction];
+		// tutorialInteractions deals with calling functions in listFunctions and map_functions to keep the next function simple.
+		tutorialInteractions(self.currentInstruction);
 	}
-	
+
+	// Is called when an event is completed.  Enables the next button.
+	this.eventFinished=function(){
+		document.getElementById("next").disabled=false;
+	}
 	// This function is called then the previous button is pushed by the user.
 	this.previous=function(){
-	alert("previous");
 		// If the user is somehow on a negative instruction, 
 		if(this.currentInstruction<=0) return self.hide(true);
 		
 		self.currentInstruction--;
 		//If the first instruction is selected, we want to hide the previous button.
-//		if(currentInstruction==0) document.getElementById("previous").hide();
+		if(self.currentInstruction==0) this.disabled=true;
+		if(self.currentInstruction<self.instructionString.length) document.getElementById("next").disabled=false;
 		self.text.innerHTML=self.instructionString[self.currentInstruction];
 	}
 	
 	// FUNCTION NOT FINISHED
 	this.hide=function(calledByError){
-	alert("hide");
 	// The calledByError variable is so that way anything that might cause an error with the instructionBox
 	// can be reset here to make it work again.
 	if(calledByError) self.currentInstruction=0;
@@ -94,8 +98,17 @@ function instructionBox(){
 	this.moveTo(100, 50);
 }
 
+
+// Any special events which the tutorial might create.
+function tutorialInteractions(instruction){
+	if(instruction==1){
+		flashFirstEarthquake();
+		document.getElementById("next").disabled=true;
+	}
+}
 // Now we need to create an instance of this object
 // We also need to catch the global function calls to interact with the object.
+
 function previousInstruction(){ return  tutorial.previous(); }
 function nextInstruction(){ return tutorial.next(); }
 function hideTutorial(){ tutorial.hide(); }
