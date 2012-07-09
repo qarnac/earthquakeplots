@@ -75,6 +75,7 @@ function finishedPlotting(){
 	child.setAttribute("style", tutorial.style + " left: 400px; top: 50px;");
 	child.innerHTML="Congratulations, you have correctly plotted all of the earthquakes!  Click Plot All Earthquakes now to see a plot of all of the earthquakes that have occured in the last 30 days!";
 	parent.appendChild(child);
+	console.Log("All Earthquakes plotted");
 }
 
 
