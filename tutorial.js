@@ -19,13 +19,13 @@ function instructionBox(){
 	this.currentInstruction=0;
 	// The array of strings which are used for each instruction.
 	this.instructionString=["Hello, and welcome to Earthquake Plots!",
-							"<b>The first step to plotting an earthquake is to decide which earthquake you want to plot.  Go ahead and select the first earthquake by clicking on the flashing row in the table.  Once selected, the row will stop flashing.</b>",
+							"The first step to plotting an earthquake is to decide which earthquake you want to plot.  Go ahead and select the first earthquake by clicking on the flashing row in the table.  Once selected, the row will stop flashing.",
 							"Next, we want to plot this earthquake on the map.  Currently, the map is centered at 0,0.  Please drag the map until the latitude and longitude of the selected earthquake are near the middle of the map.  When you're close, the next button will light up.",
 							"Now that you're over the location, simply left click on the map where you think the earthquake was.  If you guess correctly, the highlighted row will turn green.  If you get it wrong, the row will turn red.",
 							"Good Job!  Once you plot all 10 of the earthquakes in the table, click on the Plot All Earthquakes button to plot all of the earthquakes that have happened within the last 30 days!"
 							];
 	this.style="position: absolute; border:1; z-index:5; background-color:#ffffff; border-color:#000000; width:400px;";
-	// using the this keyword will not work in functions called by events.  The event object will be the this.
+	// using the this keyword will not work in functions called by events.  The event object will be the this calling the function.
 	// Due to this, it is needed to create a variable to hold the this, to use it in functions.
 	var self=this;
 	
@@ -73,8 +73,12 @@ function instructionBox(){
 	this.hide=function(calledByError){
 	self.parent.parentNode.removeChild(self.parent);
 	self.hidden=true;
+	document.getElementById("showTutorial").disabled=false;
 	}
-	
+	this.show=function(){
+	document.getElementById("container").appendChild(self.parent);
+	document.getElementById("showTutorial").disabled=true;
+	}
 	
 	
 	// now do the intialize code here.
@@ -121,3 +125,4 @@ function tutorialInteractions(instruction){
 function previousInstruction(){ return  tutorial.previous(); }
 function nextInstruction(){ return tutorial.next(); }
 function hideTutorial(){ tutorial.hide(); }
+function showTutorial(){ tutorial.show(); }

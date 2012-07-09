@@ -74,7 +74,7 @@ function plotEarthquake(slot, color){
 // Is called when the plot button is clicked.
 // goes through all of the earthquakes not shown on the table, and plots them.
 function plotAllEarthquakes(){
-	for(var i=shownEarthquakes+1; i<earthquakeList.length; i++){
+	for(var i=SHOWN_EARTHQUAKES+1; i<earthquakeList.length; i++){
 		plotEarthquake(i, changeMagToColor(earthquakeList[i][8]));
 	}
 }
