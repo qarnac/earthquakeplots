@@ -65,8 +65,17 @@ function correctClick(){
 
 	plotEarthquake(selectedEarthquake);
 	selectedEarthquake=0;
+	for(select in isSelectable) if(!select) return;
+	finishedPlotting();
 }
 
+function finishedPlotting(){
+	parent=document.getElementById("container");
+	child=document.createElement("p");
+	child.setAttribute("style", tutorial.style + " left: 400px; top: 50px;");
+	child.innerHTML="Congratulations, you have correctly plotted all of the earthquakes!  Click Plot All Earthquakes now to see a plot of all of the earthquakes that have occured in the last 30 days!";
+	parent.appendChild(child);
+}
 
 
 // Is called once the csv has been retrieved, parsed, and sorted.  Simply takes the top 5 earthquakes, and displays them in a table.
