@@ -20,12 +20,13 @@ var ACCEPT_RANGE=5;
 function changeSelectedEarthquake(value){
 	// If the earthquake has been deemed not selectable, just exit the function.
 	if(!isSelectable[value] || value==selectedEarthquake) return;
-	selectedEarthquake=value
+
 	
 	table=document.getElementById("earthquakeTable");
 	earthquakes=table.getElementsByTagName("tr");
 	earthquakes[value].className="highlight";
 	earthquakes[selectedEarthquake].className="";
+	selectedEarthquake=value;
 }
 
 
@@ -144,7 +145,14 @@ function checkLatitude(lat, isLat){
 function flashFirstEarthquake(){
 	var table=document.getElementById("earthquakeTable");
 	var earthquake=table.getElementsByTagName("tr")[1];
-	var interval=setInterval(function(){ console.log("highlight");
+	var interval=setInterval(function(){ 
+								// If the tutorial gets hidden, stop flashing.
+								if(tutorial.hidden){ 
+									earthquake.className="";
+									window.clearInterval(interval); 
+									return; 
+									}
+								console.log("highlight");
 								if(earthquake.className=="highlight") earthquake.className="";
 								else earthquake.className="highlight";
 								if(selectedEarthquake==1){

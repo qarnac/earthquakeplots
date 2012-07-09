@@ -6,6 +6,7 @@ function addButton(title, parent, onClickFunction){
 	button.onclick=onClickFunction;
 	button.setAttribute("id", title);
 	parent.appendChild(button);
+	return button;
 }
 
 
@@ -18,7 +19,7 @@ function instructionBox(){
 	this.currentInstruction=0;
 	// The array of strings which are used for each instruction.
 	this.instructionString=["Hello, and welcome to Earthquake Plots!",
-							"The first step to plotting an earthquake is to decide which earthquake you want to plot.  Go ahead and select the first earthquake by clicking on the flashing row in the table.  Once selected, the row will stop flashing.",
+							"<b>The first step to plotting an earthquake is to decide which earthquake you want to plot.  Go ahead and select the first earthquake by clicking on the flashing row in the table.  Once selected, the row will stop flashing.</b>",
 							"Next, we want to plot this earthquake on the map.  Currently, the map is centered at 0,0.  Please drag the map until the latitude and longitude of the selected earthquake are near the middle of the map.  When you're close, the next button will light up.",
 							"Now that you're over the location, simply left click on the map where you think the earthquake was.  If you guess correctly, the highlighted row will turn green.  If you get it wrong, the row will turn red.",
 							"Good Job!  Once you plot all 10 of the earthquakes in the table, click on the Plot All Earthquakes button to plot all of the earthquakes that have happened within the last 30 days!"
@@ -28,6 +29,7 @@ function instructionBox(){
 	// Due to this, it is needed to create a variable to hold the this, to use it in functions.
 	var self=this;
 	
+	this.hidden=false;
 	//define class-wide functions
 	
 	
@@ -70,6 +72,7 @@ function instructionBox(){
 	
 	this.hide=function(calledByError){
 	self.parent.parentNode.removeChild(self.parent);
+	self.hidden=true;
 	}
 	
 	
@@ -88,11 +91,11 @@ function instructionBox(){
 
 	this.text.textContent=this.instructionString[0];
 	this.parent.appendChild(this.text);
-//	document.getElementById("previous").hide();
 	document.getElementById("container").appendChild(this.parent);
 	// Now we got the text to show, lets add buttons to the bottom of the element.
 	
-	addButton("previous", this.parent, this.previous);
+	var previous=addButton("previous", this.parent, this.previous);
+	previous.disabled=true;
 	addButton("hide", this.parent, this.hide);
 	addButton("next", this.parent, this.next);
 	this.moveTo(400, 50);
@@ -112,7 +115,7 @@ function tutorialInteractions(instruction){
 		document.getElementById("next").disabled=true;
 	}
 }
-// Now we need to create an instance of this object
+
 // We also need to catch the global function calls to interact with the object.
 
 function previousInstruction(){ return  tutorial.previous(); }
