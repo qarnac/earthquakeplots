@@ -12,7 +12,7 @@ function initialize() {
     };
     map = new google.maps.Map(document.getElementById("map_canvas"),
 				  myOptions);
-    var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=38", myOptions);
+    var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=39", myOptions);
     kml.setMap(map);
     map.setZoom(3);
     google.maps.event.addListener(map, 'click', onMapClick);
@@ -29,7 +29,7 @@ function initialize() {
 					  ,textAlign: "center"
 					  ,fontSize: "8pt"
 					  ,width: "75px"
-					  ,color: "#000000"
+					  ,color: "#ffffff"
 					 }
 					,disableAutoPan: true
 					,pixelOffset: new google.maps.Size(-25, 0)
@@ -85,7 +85,8 @@ function changeMagToColor(mag){
 	if(mag>=7) return "red"
 }
 
-
+// We are no longer making the students put the location near the center.
+/*
 function checkIfNearCenter(){
 		var interval=setInterval(function(){
 			if(tutorial.hidden){
@@ -102,6 +103,7 @@ function checkIfNearCenter(){
 		
 		}, 500);
 }
+*/
 
 function parseColorToIcon(color){
 	if(color=="green") return "http://gmaps-samples.googlecode.com/svn/trunk/markers/green/blank.png";
