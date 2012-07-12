@@ -1028,7 +1028,7 @@
 
 <Style id="long/lat">
   <LineStyle>  
-   <color>ffffffff</color>
+   <color>ff000000</color>
    <width>1</width>
   </LineStyle> 
   </Style>

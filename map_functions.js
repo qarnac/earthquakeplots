@@ -12,7 +12,7 @@ function initialize() {
     };
     map = new google.maps.Map(document.getElementById("map_canvas"),
 				  myOptions);
-    var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=39", myOptions);
+    var kml=new google.maps.KmlLayer("http://ouyangdev.cs.csusm.edu/earthquakeplots/earthquake.kml?c=45", myOptions);
     kml.setMap(map);
     map.setZoom(3);
     google.maps.event.addListener(map, 'click', onMapClick);
@@ -22,14 +22,20 @@ function initialize() {
 		for(var j=-180; j<180; j=j+20){
 			var lng=(j<0)? "W":"E";
 			var lat=(i<0)?"S":"N"
+			var tagA="&nbsp;";
+			var tagB="&nbsp;";
+			if(i==0 && j==0){
+				tagA="<b>";
+				tagB="</b>";
+			}
 			 var Options = {
-					 content: "(" + Math.abs(i) +"&deg; " + lat + "," + Math.abs(j) +"&deg;" + lng +")"
+					 content: tagA + "(" + Math.abs(i) +"&deg; " + lat + "," + Math.abs(j) +"&deg;" + lng +")" + tagB
 					,boxStyle: {
 					   border: "0px solid black"
 					  ,textAlign: "center"
 					  ,fontSize: "8pt"
 					  ,width: "75px"
-					  ,color: "#ffffff"
+					  ,color: "#ffcc11"
 					 }
 					,disableAutoPan: true
 					,pixelOffset: new google.maps.Size(-25, 0)
