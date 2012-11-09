@@ -46,7 +46,7 @@ function instructionBox(){
 		if(self.currentInstruction>self.instructionString.length) return this.hide();
 		// If there are no more instructions, don't allow the user to click next.
 		if(self.currentInstruction+1>=self.instructionString.length) this.disabled=true;
-		if(self.currentInstruction==1) document.getElementById("previous").disabled=false;
+		if(self.currentInstruction==1) document.getElementById("Previous").disabled=false;
 		self.text.innerHTML=self.instructionString[self.currentInstruction];
 		// tutorialInteractions deals with calling functions in listFunctions and map_functions to keep the next function simple.
 		tutorialInteractions(self.currentInstruction);
@@ -55,7 +55,7 @@ function instructionBox(){
 	// Is called when an event is completed.  Enables the next button.
 	this.eventFinished=function(){
 		console.log("event successfully finished");
-		document.getElementById("next").disabled=false;
+		document.getElementById("Next").disabled=false;
 	}
 	// This function is called then the previous button is pushed by the user.
 	this.previous=function(){
@@ -65,7 +65,7 @@ function instructionBox(){
 		self.currentInstruction--;
 		//If the first instruction is selected, we want to hide the previous button.
 		if(self.currentInstruction==0) this.disabled=true;
-		if(self.currentInstruction<self.instructionString.length) document.getElementById("next").disabled=false;
+		if(self.currentInstruction<self.instructionString.length) document.getElementById("Next").disabled=false;
 		self.text.innerHTML=self.instructionString[self.currentInstruction];
 	}
 	
@@ -97,10 +97,10 @@ function instructionBox(){
 	document.getElementById("container").appendChild(this.parent);
 	// Now we got the text to show, lets add buttons to the bottom of the element.
 	
-	var previous=addButton("previous", this.parent, this.previous);
+	var previous=addButton("Previous", this.parent, this.previous);
 	previous.disabled=true;
-	addButton("hide", this.parent, this.hide);
-	addButton("next", this.parent, this.next);
+	addButton("Hide", this.parent, this.hide);
+	addButton("Next", this.parent, this.next);
 	this.moveTo(400, 50);
 }
 
@@ -109,7 +109,7 @@ function instructionBox(){
 function tutorialInteractions(instruction){
 	if(instruction==1){
 		flashFirstEarthquake();
-		document.getElementById("next").disabled=true;
+		document.getElementById("Next").disabled=true;
 	} 
 	// No longer making the students get the location near the center.
 	/*else if(instruction==2){
@@ -117,7 +117,7 @@ function tutorialInteractions(instruction){
 	    document.getElementById("next").disabled=true;
 	} */ else if(instruction==2){
 		isPlottedCorrectly();
-		document.getElementById("next").disabled=true;
+		document.getElementById("Next").disabled=true;
 	}
 }
 
